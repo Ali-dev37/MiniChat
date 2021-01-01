@@ -4,7 +4,6 @@ class MessageFrom extends Component {
     state = {  
       userName:"",
       message:"",
-      userId: "",
     }
     render() { 
         const {onSend,client_id} = this.props;
@@ -26,7 +25,7 @@ class MessageFrom extends Component {
               <button className="btn btn-warning w-100" onClick={(e)=>{
                   e.preventDefault();
                   onSend({userName,message,client_id})
-                  this.setState({userName:"",message:""});
+                  this.setState({message:""});
                 }}>
                   Send
               </button>
