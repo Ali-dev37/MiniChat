@@ -3,6 +3,7 @@ from typing import List
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
 
 
@@ -17,12 +18,15 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-messages = []
+
+
+messages = [] #List of chat messages
 
 
    
 
 
+# Class for connecting the client with the webSocket
 class ConnectionManager:
     def __init__(self):
         self.active_connections: List[WebSocket] = []
@@ -42,7 +46,8 @@ class ConnectionManager:
             await connection.send_json(message)
 
 
-manager = ConnectionManager()
+manager = ConnectionManager() # instance of the Connection Manager
+
 html = """ hi"""
 
 @app.get("/")
@@ -50,15 +55,19 @@ async def get():
     return HTMLResponse(html)
 
 
-
+#websocket for publish the comming message to all client connected in
 @app.websocket("/ws/{client_id}")
 async def websocket_endpoint(websocket: WebSocket, client_id: int):
-    await manager.connect(websocket)
+    await manager.connect(websocket) # connecting the client with the websocket
     try:
         while True:
-            data = await websocket.receive_json()
-            messages.append(data)
-            await manager.broadcast(messages)
+            data = await websocket.receive_json() # Data recieve when the client send a message
+            messages.append(data) # Add the coming message to the list of messages
+
+            """ here we call a ConnectionManager method named "broadcast()" that publish the list of messages to
+            all clients """
+            await manager.broadcast(messages) 
+                                            
     except WebSocketDisconnect:
-        manager.disconnect(websocket)
-        await manager.broadcast(messages)
+        manager.disconnect(websocket) # deconnecting if an exeption handled
+        # await manager.broadcast(messages) 
