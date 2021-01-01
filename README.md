@@ -24,4 +24,8 @@ next step go to /frontEnd/minichat/ in the command prompt and run :
 ```bash
 npm start
 ```
+## Run Project
 
+Realtime Chat 
+
+![Mini Chat](https://github.com/Ali-dev37/MiniChat/blob/develop/Capture.JPG)
