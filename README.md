@@ -1,7 +1,7 @@
 
 # MiniChat
 
-MiniCha is a mini project developed with fastapi and react js
+MiniChat is a mini project developed with fastapi and react js
 
 ## Installation
 
