@@ -1,7 +1,7 @@
 
 # MiniChat
 
-Foobar is a mini project developed with fastapi and react js
+MiniCha is a mini project developed with fastapi and react js
 
 ## Installation
 
